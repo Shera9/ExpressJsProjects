@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {{>headerLinks}}
+</head>
+<body>
+    <div class="container-fluid main-menu">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="/"><i class="far fa-snowflake" aria-hidden="true" ></i><span class="sak"> SAK</span>weather <i class="far fa-snowflake" aria-hidden="true" ></i></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/weather">Weather</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About Us</a>
+                          </li>
+                       
+                      
+                      </ul>
+                     
+                    </div>
+                  </nav>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="container-fluid main-header">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+            <div class="main_content">
+              <form class="main_form">
+              <input type="text" id="cityName" placeholder="Enter Your City Name" autocomplete="off">
+              <input type="submit" value="search" id="submitBtn"></form>
+            </div>
+
+            <div class="tempInfo">
+              <div class="top_layer">
+                <p id="day">Tuesday</p>
+                <p id="today_date">20 DEC</p>
+                <p id="curTime">time</p>
+              </div>
+              
+              <div class="main_layer">
+                <p id="city_outPut"></p>
+              
+              <div class="middle_layer data_hide">
+                <p id="temp"><span id="temp_real_val">0</span><sup>o</sup>C</p>
+                <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+              </div></div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    {{>footer}}
+
+    <script src="js/main.js"></script>
+    <script>
+      const day = document.getElementById("day");
+      const todayDate = document.getElementById("today_date");
+      const curTime = document.getElementById("curTime");
+
+       const currentDay=()=>{
+             var weekday=new Array(7);
+             weekday[0]="Sunday";
+             weekday[1]="Monday";
+             weekday[2]="Tuesday";
+             weekday[3]="Wednesday";
+             weekday[4]="Thursday";
+             weekday[5]="Friday";
+             weekday[6]="Saturday";
+            let currentTime=new Date();
+           let days= weekday[currentTime.getDay()];
+            
+           day.innerText = days;
+           }
+          
+
+            const getCurrentTime=()=>{
+            var months=[
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sept",
+                "Oct",
+                "Nov",
+                "Dec",
+            ];
+             var timeNow=new Date();
+            var month=months[timeNow.getMonth()];
+           
+            var date = timeNow.getDate();
+
+            let hours=timeNow.getHours();
+            let mins= timeNow.getMinutes();
+
+            let periods="AM";
+            if(hours>11){
+                periods="PM";
+                if(hours>12) hours-=12;
+            }
+            if(mins<10){
+                mins="0" +mins;
+            }
+            // var year=timeNow.getFullYear();
+           todayDate.innerText=`${month}, ${date}`;
+           curTime.innerText=`${hours}:${mins} ${periods}`;
+
+         
+        }
+        currentDay() +" | "+ getCurrentTime();
+        
+        
+    </script>
+</body>
+</html>
